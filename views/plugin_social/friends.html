@@ -1,0 +1,28 @@
+{{extend 'layout.html'}}
+{{if friends:}}
+<h2>People who requested your friendship</h2>
+  {{for friend in friends:}}
+  <dl>
+    <dt>{{=A('%(first_name)s %(last_name)s #%(id)s' % friend.auth_user,_href=URL('default','home',args=friend.auth_user.id))}}</dt>
+    <dd>
+      {{=plugin_social_accept_button(friend.auth_user.id) if not friend.plugin_social_link.accepted else T('Accepted')}}
+      {{=plugin_social_deny_button(friend.auth_user.id)}}
+    </dd>
+  </dl>
+  {{pass}}
+{{pass}}
+{{if requests:}}
+<h2>People you requested friendship to</h2>
+  {{for friend in requests:}}
+  <dl>
+    <dt>{{=A('%(first_name)s %(last_name)s #%(id)s' % friend.auth_user,_href=URL('default','home',args=friend.auth_user.id))}}</dt>
+    <dd>
+      {{=plugin_social_revoke_button(friend.auth_user.id)}}
+    </dd>
+  </dl>
+  {{pass}}
+{{pass}}
+{{if not friends and not requests:}}
+  <h2>No pending friendship requests</h2>
+{{pass}}
+

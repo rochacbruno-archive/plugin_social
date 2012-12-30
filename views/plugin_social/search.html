@@ -1,0 +1,22 @@
+{{extend 'layout.html'}}
+<h2>Search for friends</h2>
+
+{{=form.custom.begin}}
+<div class="input-prepend input-append">
+  <span class="add-on">Search friends by name</span>
+  {{=form.custom.widget.name}}
+  <button class="btn" type="button">Search</button>
+</div>
+{{=form.custom.end}}
+
+{{if people:}}
+<h3>Results</h3>
+{{for user in people:}}
+<dl>
+  <dt>{{=A('%(first_name)s %(last_name)s #%(id)s' % user, _href=URL('default','home',args=user.id))}}</dt>
+  <dd>
+    {{=plugin_social_friend_button(user.id)}}
+  </dd>
+<dl>
+{{pass}}
+{{pass}}
