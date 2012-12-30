@@ -1,4 +1,8 @@
 # a page for searching friends and requesting friendship
+
+def index():
+    return dict()
+
 @auth.requires_login()
 def search(): 
     return plugin_social_search()
